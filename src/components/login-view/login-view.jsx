@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RegistrationView } from '../registration-view/registration-view';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -9,7 +10,7 @@ export function LoginView(props) {
     console.log(username, password);
     /* Send a request to the server for authentication */
     /* then call props.onLoggedIn(username) */
-     //props.onLoggedIn(username);
+     props.onLoggedIn(username);
   };
 
   return (
