@@ -51,7 +51,7 @@ onLoggedIn(user) {
 
 
  render() {
-  const { movies, selectedMovie, user } = this.state;
+  const { movies, selectedMovie, user, registered } = this.state;
 
   
 
