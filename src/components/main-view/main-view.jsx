@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 export class MainView extends React.Component {
@@ -60,6 +59,11 @@ onLoggedIn(user) {
 
   //If the user is on register, show registration view and register
   if (!registered)
+  return (
+    <RegistrationView
+      onRegistration={(register) => this.onRegistration(register)}
+    />
+  );
       //return <RegistrationView onRegistration={(register) => this.onRegistration(register)} />;
   
     if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
