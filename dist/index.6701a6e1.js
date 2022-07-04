@@ -25256,17 +25256,18 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _loginView = require("../login-view/login-view");
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 var _registrationView = require("../registration-view/registration-view");
-var _loginView = require("../login-view/login-view");
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
         this.state = {
             movies: [],
             selectedMovie: null,
-            user: null
+            user: null,
+            registered: null
         };
     }
     componentDidMount() {
@@ -25283,21 +25284,22 @@ class MainView extends _reactDefault.default.Component {
             selectedMovie: newSelectedMovie
         });
     }
-    /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/ onLoggedIn(user) {
-        this.setState({
-            user
-        });
-    }
     // When a user successfully register, this function updates the user properties
     onRegistration(registered) {
         this.setState({
             registered
         });
     }
+    /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/ onLoggedIn(user) {
+        this.setState({
+            user
+        });
+    }
     render() {
         const { movies , selectedMovie , user , registered  } = this.state;
-        /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/ if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
-            onLoggedIn: (user1)=>this.onLoggedIn(user1)
+        //If the user is on register, show registration view and register
+        if (!registered) return(/*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
+            onRegistration: (register)=>this.onRegistration(register)
             ,
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
@@ -25305,13 +25307,12 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }));
-        //If the user is on register, show registration view and register
-        if (!registered) return(/*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
-            onRegistration: (register)=>this.onRegistration(register)
+        /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/ if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+            onLoggedIn: (user1)=>this.onLoggedIn(user1)
             ,
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 63
+                lineNumber: 64
             },
             __self: this
         }));
@@ -29707,6 +29708,10 @@ parcelHelpers.export(exports, "LoginView", ()=>LoginView
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
 function LoginView(props) {
     _s();
@@ -29714,8 +29719,16 @@ function LoginView(props) {
     const [password, setPassword] = _react.useState('');
     const handleSubmit = (e)=>{
         e.preventDefault();
-        console.log(username, password);
-        /* Send a request to the server for authentication */ /* then call props.onLoggedIn(username) */ props.onLoggedIn(username);
+        const isReq = validate();
+        if (isReq) _axiosDefault.default.post('https://myshowflix.herokuapp.com/login', {
+            Username: username,
+            Password: password
+        }).then((response)=>{
+            const data = response.data;
+            props.onLoggedIn(data);
+        }).catch((e1)=>{
+            console.log('no such user');
+        });
     };
     const handleRegister = (e)=>{
         e.preventDefault();
@@ -29724,14 +29737,14 @@ function LoginView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs("form", {
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 22
+            lineNumber: 34
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsxs("label", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 23
+                    lineNumber: 35
                 },
                 __self: this,
                 children: [
@@ -29743,7 +29756,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 25
+                            lineNumber: 37
                         },
                         __self: this
                     })
@@ -29752,7 +29765,7 @@ function LoginView(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs("label", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 27
+                    lineNumber: 39
                 },
                 __self: this,
                 children: [
@@ -29764,7 +29777,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 29
+                            lineNumber: 41
                         },
                         __self: this
                     })
@@ -29775,7 +29788,7 @@ function LoginView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 31
+                    lineNumber: 43
                 },
                 __self: this,
                 children: "Submit"
@@ -29785,7 +29798,7 @@ function LoginView(props) {
                 onClick: handleRegister,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 32
+                    lineNumber: 44
                 },
                 __self: this,
                 children: "Register Here"
@@ -29795,6 +29808,13 @@ function LoginView(props) {
 }
 _s(LoginView, "9FY2cPL9VBDmuhjwpF2ik6flsHs=");
 _c = LoginView;
+LoginView.propTypes = {
+    user: _propTypesDefault.default.shape({
+        username: _propTypesDefault.default.string.isRequired,
+        password: _propTypesDefault.default.string.isRequired
+    }),
+    onLoggedIn: _propTypesDefault.default.func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "LoginView");
 
@@ -29803,7 +29823,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"dtTKZ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"208Xa"}],"aP2YV":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"dtTKZ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"208Xa","prop-types":"1tgq3","axios":"iYoWk"}],"aP2YV":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$8dd4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
