@@ -34,23 +34,27 @@ export class MainView extends React.Component {
     });
   }
 
-  // When a user successfully register, this function updates the user properties
-  onRegistration(registered) {
-    this.setState({
-      registered,
-    });
-  }
-
-/* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
 
 onLoggedIn(user) {
   this.setState({
     user
   });
 }
+// When a user successfully register, this function updates the user properties
+  onRegistration(registered) {
+    this.setState({
+      registered,
+    });
+  }
+
+
 
  render() {
   const { movies, selectedMovie, user, registered } = this.state;
+  
+  /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
+  if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     //If the user is on register, show registration view and register
   if (!registered)
@@ -60,8 +64,6 @@ onLoggedIn(user) {
     />
   );
 
-  /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-  if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
 
       //return <RegistrationView onRegistration={(register) => this.onRegistration(register)} />;
