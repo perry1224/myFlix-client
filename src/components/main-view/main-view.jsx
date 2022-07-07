@@ -14,7 +14,7 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
-      registered: null
+      shouldregistered: false
   };
   }
   componentDidMount(){
@@ -42,27 +42,33 @@ onLoggedIn(user) {
   });
 }
 // When a user successfully register, this function updates the user properties
-  onRegistration(registered) {
+  navigateRegistration(x) {
     this.setState({
-      registered,
+      shouldregistered:x,
     });
   }
-
+onRegistration() {
+  this.navigateRegistration(false)
+}
 
 
  render() {
-  const { movies, selectedMovie, user, registered } = this.state;
-  
-  /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-  if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
-    //If the user is on register, show registration view and register
-  if (!registered)
-  return (
+  const { movies, selectedMovie, user, shouldregistered } = this.state;
+console.log(this.state);
+/* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
+  if (!user) { 
+    if (shouldregistered)
+    return (
     <RegistrationView
       onRegistration={(register) => this.onRegistration(register)}
     />
   );
+    
+    return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegistration={() => this.navigateRegistration(true) } />  
+  }
+
+    //If the user is on register, show registration view and register
+
 
 
 

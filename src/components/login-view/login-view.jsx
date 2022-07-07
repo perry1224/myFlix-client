@@ -16,7 +16,8 @@ export function LoginView(props) {
 
   const handleRegister = (e) => {
     e.preventDefault()
-    props.onRegister(true)
+    console.log(props);
+    props.onRegistration()
 }
 
   return (
