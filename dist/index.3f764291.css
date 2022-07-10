@@ -13,6 +13,9 @@ dl dl dt {
 dl dt {
   color: rgb(46, 148, 232);
 }
+.card {
+  color: blue;
+}
 .my-flix {
   color: steelblue;
 }
