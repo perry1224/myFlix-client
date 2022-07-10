@@ -2,6 +2,10 @@
   object-fit: cover;
   object-position: center top;
 }
+
+.card {
+  color: black;
+}
 dd dl {
   margin-left: 2em;
 }
@@ -11,12 +15,10 @@ dl dl dt {
 }
 
 dl dt {
-  color: rgb(46, 148, 232);
+  color: rgb(7, 119, 212);
 }
 .card {
-  color: blue;
+  color: rgb(7, 119, 212);
 }
-.my-flix {
-  color: steelblue;
-}
+
 /*# sourceMappingURL=index.3f764291.css.map */

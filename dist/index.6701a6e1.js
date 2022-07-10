@@ -28674,8 +28674,8 @@ MovieCard.propTypes = {
         }),
         Director: _propTypesDefault.default.shape({
             Name: _propTypesDefault.default.string.isRequired,
-            Birth: _propTypesDefault.default.string.isRequired,
-            Bio: _propTypesDefault.default.string.isRequired
+            DOB: _propTypesDefault.default.string.isRequired,
+            BIO: _propTypesDefault.default.string.isRequired
         })
     }).isRequired,
     onMovieClick: _propTypesDefault.default.func.isRequired
