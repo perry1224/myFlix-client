@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel",
+    "start": "parcel src/index.html",
     "build": "parcel build"
   },
   "repository": {
@@ -26,6 +26,6 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-rc.0"
+  "parcel": "2.6.2"
   }
 }

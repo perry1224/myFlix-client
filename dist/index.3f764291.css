@@ -1,0 +1,19 @@
+.card img {
+  object-fit: cover;
+  object-position: center top;
+}
+dd dl {
+  margin-left: 2em;
+}
+
+dl dl dt {
+  display: inline-block;
+}
+
+dl dt {
+  color: rgb(46, 148, 232);
+}
+.my-flix {
+  color: steelblue;
+}
+/*# sourceMappingURL=index.3f764291.css.map */

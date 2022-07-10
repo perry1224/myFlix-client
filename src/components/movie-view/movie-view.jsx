@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./movie-view.scss";
 export class MovieView extends React.Component {
 
   keypressCallback(event) {
@@ -23,37 +23,32 @@ export class MovieView extends React.Component {
           <img src={movie.ImagePath} crossOrigin='anonymous' height= '200' />
         </div>
 
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
+        <dl>
+          <dt>Title:</dt>
+          <dd>{movie.Title}</dd>
+        </dl>
+      
+      <dl>
+        <dt>Description</dt>
+        <dd>{movie.Description}</dd>
+        <dt>Director:</dt>
+        <dd>
+          <dl>
+            <dt>BIO:</dt>
+            <dd>{movie.Director.BIO}</dd>
+            <dt>DOB:</dt>
+            <dd>{movie.Director.DOB}</dd>
+          </dl>
+        </dd>
+      </dl>
 
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
 
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">
-           <div> {movie.Director.Name}</div> 
-           <div>   BIO:   
-              {movie.Director.BIO} </div>
-           <div>   DOB:  
-              {movie.Director.DOB} </div>
-          </span>
-        </div>
-
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">
-          <div>  {movie.Genre.Name} </div> 
-          <div> Description: 
-            {movie.Genre.Description}</div>
-           </span> 
-          </div>
-
-        <button onClick={() => { onBackClick(null); }}>Back</button>
+<dl>
+  <dt>Genre:</dt>
+  <dd>{movie.Genre.Name}</dd>
+  <dt>Description:</dt>
+  <dd>{movie.Genre.Description}</dd>
+</dl>
 
       </div>
     );
