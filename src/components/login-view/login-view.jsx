@@ -3,10 +3,28 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Form, Button, Row, Col, Card, Container } from 'react-bootstrap';
+import axios from 'axios';
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  /* Send a request to the server for authentication */
+  axios.post('https://myshowflix.herokuapp.com/users', {
+    Username: username,
+    Password: password
+  })
+  .then(response => {
+    const data = response.data;
+    props.onLoggedIn(data);
+  })
+  .catch(e => {
+    console.log('no such user')
+  });
+};
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
