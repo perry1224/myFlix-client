@@ -42190,7 +42190,7 @@ function RegistrationView(props) {
             Username: username,
             Password: password,
             Email: email,
-            Birthday: birthdate
+            Birthdate: birthdate
         }).then((response)=>{
             const data = response.data;
             console.log(data);
@@ -42426,7 +42426,10 @@ function RegistrationView(props) {
 _s(RegistrationView, "92PBTZUm9Z4m8OLKNJLl96RAdAY=");
 _c = RegistrationView;
 RegistrationView.propTypes = {
-    onRegistration: _propTypesDefault.default.func.isRequired
+    email: _propTypesDefault.default.string.isRequired,
+    birthdate: _propTypesDefault.default.instanceOf(Date).isRequired,
+    username: _propTypesDefault.default.string.isRequired,
+    password: _propTypesDefault.default.string.isRequired
 };
 var _c;
 $RefreshReg$(_c, "RegistrationView");

@@ -50,7 +50,7 @@ export function RegistrationView(props) {
         Username: username,
         Password: password,
         Email: email,
-        Birthday: birthdate
+        Birthdate: birthdate
       })
         .then(response => {
           const data = response.data;
@@ -147,5 +147,8 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.propTypes = {
-  onRegistration: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  birthdate: PropTypes.instanceOf(Date).isRequired,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired
 };
