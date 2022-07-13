@@ -8,12 +8,12 @@ export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [birthday, setBirthday] = useState('');
 
   const [usernameErr, setUsernameErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
   const [emailErr, setEmailErr] = useState('');
-  const [birthdateErr, setBirthdateErr] = useState('');
+  const [birthdayErr, setBirthdayErr] = useState('');
 
    // Validate user inputs
    const validate = () => {
@@ -50,10 +50,11 @@ export function RegistrationView(props) {
         Username: username,
         Password: password,
         Email: email,
-        Birthdate: birthdate
+        Birthday: birthday
       })
         .then(response => {
           const data = response.data;
+        
           console.log(data);
           alert("Registration successful, please login!");
           window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
@@ -118,14 +119,14 @@ export function RegistrationView(props) {
               </Form.Group>
 
               <Form.Group>
-              <Form.Label>Birthdate:</Form.Label>
+              <Form.Label>Birthday:</Form.Label>
               <Form.Control 
                 type="date" 
-                value={birthdate} 
-                onChange={e => setBirthdate(e.target.value)} 
+                value={birthday} 
+                onChange={e => setBirthday(e.target.value)} 
                 required
                 />
-                {birthdateErr && <p>{birthdateErr}</p>}
+                {birthdayErr && <p>{birthdayErr}</p>}
               </Form.Group>
 
           
@@ -146,9 +147,9 @@ export function RegistrationView(props) {
   ); 
 }
 
-RegistrationView.propTypes = {
-  email: PropTypes.string.isRequired,
-  birthdate: PropTypes.instanceOf(Date).isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
-};
+//RegistrationView.propTypes = {
+  //Email: PropTypes.string.isRequired,
+  //Birthday: PropTypes.instanceOf(Date).isRequired,
+  //Username: PropTypes.string.isRequired,
+ // Password: PropTypes.string.isRequired
+//};
