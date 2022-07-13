@@ -83,7 +83,8 @@ onRegistration() {
 
 
  render() {
-  const { movies, selectedMovie, user, shouldregistered } = this.state;
+  const { movies, selectedMovie, user, shouldregistered, onLoggedOut } = this.state;
+  
 
 /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
   if (!user) { 
@@ -97,7 +98,7 @@ onRegistration() {
     return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegistration={() => this.navigateRegistration(true) } />  
   }
 
-  
+ 
     if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
   
     return (
@@ -111,11 +112,14 @@ onRegistration() {
           : movies.map(movie => (
             <Col key={movie._id} md={3}>
               <MovieCard movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-             
+              
+
             </Col>
           ))
         }
+        <button onClick={() => { this.onLoggedOut() }}>Logout</button>
       </Row>
+      
     );
   }
 }
