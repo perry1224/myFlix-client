@@ -102,6 +102,7 @@ onRegistration() {
     if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
   
     return (
+      <div>
       <Row className="main-view justify-content-md-center">
         {selectedMovie
           ? (
@@ -117,8 +118,10 @@ onRegistration() {
             </Col>
           ))
         }
-        <button onClick={() => { this.onLoggedOut() }}>Logout</button>
+        
       </Row>
+      <button onClick={() => { this.onLoggedOut() }}>Logout</button>
+      </div>
       
     );
   }
