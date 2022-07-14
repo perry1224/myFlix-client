@@ -1,5 +1,8 @@
 import React from 'react';
 import "./movie-view.scss";
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+
 export class MovieView extends React.Component {
 
   keypressCallback(event) {
@@ -33,12 +36,13 @@ export class MovieView extends React.Component {
         <dd>{movie.Description}</dd>
         <dt>Director:</dt>
         <dd>
-          <dl>
-            <dt>BIO:</dt>
-            <dd>{movie.Director.BIO}</dd>
-            <dt>DOB:</dt>
-            <dd>{movie.Director.DOB}</dd>
-          </dl>
+          { movie.Director.Name }
+            {/* <dt>BIO:</dt> */}
+            {/* <dd>{movie.Director.BIO}</dd> */}
+            {/* <dt>DOB:</dt> */}
+            {/* <dd>{movie.Director.DOB}</dd> */}
+            
+          
         </dd>
       </dl>
 
@@ -46,10 +50,18 @@ export class MovieView extends React.Component {
 <dl>
   <dt>Genre:</dt>
   <dd>{movie.Genre.Name}</dd>
-  <dt>Description:</dt>
-  <dd>{movie.Genre.Description}</dd>
+  {/* <dt>Description:</dt> */}
+  {/* <dd>{movie.Genre.Description}</dd> */}
 </dl>
-<button onClick={() => { onBackClick(null); }}>Back</button>
+<Button variant="dark" onClick={() => { onBackClick(null); }}>« Back</Button>
+<Link to={`/genre/${movie.Genre.Name}`}>
+  <Button variant="info">Genre Info</Button>
+</Link> 
+ <Link to={`/director/${movie.Director.Name}`}>
+  <Button variant="success">Director Info</Button>
+</Link>
+
+
       </div>
     );
   }
