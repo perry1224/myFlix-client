@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import "./profile-view.scss";
 import { Button, Col, Container, Row } from 'react-bootstrap';
 
 import { FavoriteMovieView } from './favorite-movie-view';
 import { UpdateView } from './update-view';
 
-import './profile-view.scss';
 
 export function ProfileView(props) {
   const [ user, setUser ] = useState(props.user);
@@ -44,8 +44,8 @@ export function ProfileView(props) {
   }
 
   return (
-    <Container id="profile-form">
-      <Row><h4>Your profile</h4></Row>
+    <Container id="profile-form" key={movies._id}>
+      <Row><h4>Your Profile</h4></Row>
       <Row>
         <Col className="label">Username:</Col>
         <Col className="value">{user.Username}</Col>
@@ -62,9 +62,10 @@ export function ProfileView(props) {
         <Col className="label">Birthday:</Col>
         <Col className="value">{user.Birthday}</Col>
         </Row>
-        <Row className="mt-5"><h4>Your favorite movies</h4></Row>
+        <Row className="mt-5"><h4>Your Favorite Movies</h4></Row>
         <Row className="mt-3">
           <FavoriteMovieView 
+          
           movies={movies} 
           favoriteMovies={favoriteMovies} 
           currentUser={currentUser} 

@@ -17,7 +17,7 @@ console.log(movie)
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
           <Link to={`/movies/${movie._id}`}>
-            <Button variant="link">Open</Button>
+            <Button variant="link">More Info</Button>
           </Link>
         </Card.Body>
       </Card>
