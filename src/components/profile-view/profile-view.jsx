@@ -1,166 +1,77 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import "./favorite-movies.jsx";
-import "./profile-view.scss";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
-import { Container, Col, Row, Button, Card, Form } from "react-bootstrap";
+import { Button, Col, Container, Row } from 'react-bootstrap';
+
+import { FavoriteMovieView } from './favorite-movie-view';
+import { UpdateView } from './update-view';
+
+import './profile-view.scss';
 
 export function ProfileView(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [favoriteMovies, setFavoriteMovies] = useState({});
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [ user, setUser ] = useState(props.user);
+  const [ movies, setMovies ] = useState(props.movies);
+  const [ favoriteMovies, setFavoriteMovies ] = useState([]);
+  const currentUser = localStorage.getItem('user');
+  const token = localStorage.getItem('token');
 
-  const [user, setUserData] = useState("");
-  const [movies, setMovies] = useState([]);
-  const User = localStorage.getItem("user");
-  const token = localStorage.getItem("token");
-  const [favoriteMoviesList, setFavoriteMoviesList] = useState([]);
-
-  const getUserData = () => {
-    let user = localStorage.getItem("user");
-    let token = localStorage.getItem("token");
-    axios
-      .get(`https://myshowflix.herokuapp.com/users/${user}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setUsername(response.data.Username);
-        setEmail(response.data.Email);
-        setUserData(response.data);
-        setFavoriteMoviesList(response.data.FavoriteMovies);
-        console.log(response);
-
-        response.data.FavoriteMovies.forEach((movie_id) => {
-          let favMovies = props.movies.filter(
-            (movie) => movie._id === movie_id
-          );
-          setMovies(favMovies);
-        });
-      })
-      .catch((error) => console.error(error));
-  };
-
-  // Delete Profile
-  const handleDelete = (e) => {
-    const user = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
-    axios.delete(`https://myshowflix.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    alert(`The account ${user.Username} was successfully deleted.`);
-    localStorage.clear();
-    window.open("/register", "_self");
-  };
-  // Update Profile
-  const handleUpdate = () => {
-    let user = localStorage.getItem("user");
-    let token = localStorage.getItem("token");
-
-    axios.put(`https://myshowflix.herokuapp.com/users/${user}`,
-        {
-          Username: username,
-          Password: password,
-          Email: email,
-          Birthday: birthday,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-
-      .then((response) => {
-        alert("Your profile has been updated");
-        localStorage.setItem("user", response.data.Username),
-          console.log(response.data);
-        window.open("/", "_self");
-      })
-      .catch((e) => {
-        console.log("Error");
-      });
-  };
+  const getUser = () => {
+    axios.get(`https://myshowflix.herokuapp.com/users/${currentUser}`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      setUser(response.data);
+      setFavoriteMovies(response.data.FavoriteMovies)
+    })
+    .catch(error => console.error(error))
+  }
 
   useEffect(() => {
-    getUserData();
-  }, []);
+    getUser();
+  }, [])
+
+  const handleDelete = () => {
+    axios.delete(`https://myshowflix.herokuapp.com/users/${currentUser}`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(() => {
+      alert(`The account ${user.Username} was successfully deleted.`)
+      localStorage.clear();
+      window.open('/register', '_self');
+    }).
+    catch(error => console.error(error))
+  }
 
   return (
-    <Container>
+    <Container id="profile-form">
+      <Row><h4>Your profile</h4></Row>
       <Row>
-        <h3>Profile</h3>
-      </Row>
-      <Form>
-        <Form.Group className="mb-3" controlId="username">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-            type="text"
-            placeholder="username"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            value={password}
-            placeholder="Password"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            type="email"
-            placeholder="Enter new email"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="birthday">
-          <Form.Label>Birthday:</Form.Label>
-          <Form.Control
-            onChange={(e) => setBirthday(e.target.value)}
-            value={birthday}
-            type="date"
-            placeholder="birthday"
-          />
-        </Form.Group>
-      </Form>
-      <Button className="mt-2" onClick={handleUpdate}>
-        Update your profile
-      </Button>
-      <Button className="mt-2 ml-4" onClick={handleDelete}>
-        Delete your profile
-      </Button>
-      <h4>Favorite movies:</h4>
-      <Card className="fav-list">
-        <Card.Body>
-          {favoriteMoviesList.map((movie) => {
-            return (
-              <div key={movie._id}>
-                <img src={movie.ImagePath} alt={movie.Title} />
-                <Link to={`/movies/${movie._id}`}>
-                  <h4>{movie.Title}</h4>
-                </Link>
-              </div>
-            );
-          })}
-        </Card.Body>
-      </Card>
+        <Col className="label">Username:</Col>
+        <Col className="value">{user.Username}</Col>
+        </Row>
+        <Row className="mt-3">
+        <Col className="label">Password:</Col>
+        <Col className="value">******</Col>
+        </Row>
+        <Row className="mt-3">
+        <Col className="label">Email:</Col>
+        <Col className="value">{user.Email}</Col>
+        </Row>
+        <Row className="mt-3">
+        <Col className="label">Birthday:</Col>
+        <Col className="value">{user.Birthday}</Col>
+        </Row>
+        <Row className="mt-5"><h4>Your favorite movies</h4></Row>
+        <Row className="mt-3">
+          <FavoriteMovieView 
+          movies={movies} 
+          favoriteMovies={favoriteMovies} 
+          currentUser={currentUser} 
+          token={token}/>
+        </Row>
+        <UpdateView user={user}/>
+        <Button className="d-block mt-5" variant="danger" onClick={handleDelete}>Delete profile</Button>
     </Container>
-  );
+  )
 }
-
-ProfileView.propTypes = {
-  profileView: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Password: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.string,
-  }),
-};
-  
