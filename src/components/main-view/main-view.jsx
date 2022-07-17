@@ -99,7 +99,7 @@ render() {
 
   return (
     <Router>
-      <Navbar></Navbar>
+      <Navbar user={user}></Navbar>
       
       <Row className="main-view justify-content-md-center">
         <Route exact path="/" render={() => {

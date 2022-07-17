@@ -25609,7 +25609,9 @@ class MainView extends (0, _reactDefault.default).Component {
         // if (movies.length === 0) return <div className="main-view" />;
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
             children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarView.Navbar), {}, void 0, false, {
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarView.Navbar), {
+                    user: user1
+                }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 102,
                     columnNumber: 7
@@ -38483,23 +38485,7 @@ function Navbar({ user  }) {
                                 children: "Logout"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar-view.jsx",
-                                lineNumber: 33,
-                                columnNumber: 33
-                            }, this),
-                            !isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                href: "/",
-                                children: "Profile"
-                            }, void 0, false, {
-                                fileName: "src/components/navbar/navbar-view.jsx",
-                                lineNumber: 36,
-                                columnNumber: 33
-                            }, this),
-                            !isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                href: "/register",
-                                children: "Register"
-                            }, void 0, false, {
-                                fileName: "src/components/navbar/navbar-view.jsx",
-                                lineNumber: 39,
+                                lineNumber: 35,
                                 columnNumber: 33
                             }, this)
                         ]

@@ -29,15 +29,11 @@ export function Navbar ({user}) {
                               {isAuth() && (
                                       <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
                               )} 
-                              {isAuth() && (
+                             
+
+                                 {isAuth() && (
                                 <Button variant ="link" onClick={() => { onLoggedout()}}>Logout</Button>
                                )}
-                               {!isAuth() && (
-                                <Nav.Link href="/">Profile</Nav.Link>
-                               )} 
-                               {!isAuth() && (
-                                <Nav.Link href="/register">Register</Nav.Link> 
-                                )}
                                 </Nav>
                                 </Navbar.Collapse>
         
