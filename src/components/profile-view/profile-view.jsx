@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import "./favorite-movies.jsx";
 import "./profile-view.scss";
 
 import { Container, Col, Row, Button, Card, Form } from "react-bootstrap";
@@ -60,9 +60,7 @@ export function ProfileView(props) {
     let user = localStorage.getItem("user");
     let token = localStorage.getItem("token");
 
-    axios
-      .put(
-        `https://myshowflix.herokuapp.com/users/${user}`,
+    axios.put(`https://myshowflix.herokuapp.com/users/${user}`,
         {
           Username: username,
           Password: password,

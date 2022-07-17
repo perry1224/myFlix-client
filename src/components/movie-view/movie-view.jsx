@@ -2,8 +2,18 @@ import React from 'react';
 import "./movie-view.scss";
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 export class MovieView extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      movies: [],
+      user: null,
+    };
+  }
 
   keypressCallback(event) {
     console.log(event.key);
@@ -17,8 +27,49 @@ export class MovieView extends React.Component {
     document.removeEventListener('keypress', this.keypressCallback);
   }
 
+  addMovie(movie) {
+    let username = localStorage.getItem("user");
+    let token = localStorage.getItem("token");
+    console.log(movie);
+    console.log(token);
+
+    axios.post(`https://myshowflix.herokuapp.com/users/${username}/movies/${movie._id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response.data);
+        alert(`${movie.Title} has been added from your list.`);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  delFavMovie = (movie) => {
+    let token = localStorage.getItem("token");
+    let username = localStorage.getItem("user");
+    console.log(movie);
+    console.log(token);
+    axios
+      .delete(
+        `https://myshowflix.herokuapp.com/users/${username}/movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        alert(`${movie.Title} has been removed from your list.`);
+      })
+      .catch((e) => {
+        console.log("Error");
+      });
+  };
+
+
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, onBackClick, user } = this.props;
 
     return (
       <div className="movie-view">
@@ -60,7 +111,14 @@ export class MovieView extends React.Component {
  <Link to={`/director/${movie.Director.Name}`}>
   <Button variant="success">Director Info</Button>
 </Link>
-
+<Button 
+    onClick={() => {
+        this.addMovie(movie);
+          }} > Add to favorites </Button>
+<Button 
+    onClick={() => {
+        this.delFavMovie(movie);
+          }}>Remove from favorites</Button>
 
       </div>
     );
