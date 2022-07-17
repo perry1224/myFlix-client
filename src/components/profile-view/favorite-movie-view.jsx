@@ -1,5 +1,4 @@
-import React, {  useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -8,19 +7,17 @@ import { Button, Card, Col } from 'react-bootstrap';
 
 
 export function FavoriteMovieView(props) {
-  const { movies, favoriteMovies, currentUser, token } = props;
+  const { movies, favoriteMovies } = props;
   
   const favoriteMoviesList = movies.filter(m => {
    favoriteMovies.includes(m._id) 
    return favoriteMovies.includes(m._id)
   })
 
-  const handleMovieDelete = (movie) =>{
+  const handleMovieDelete = (movieId) =>{
     let username = localStorage.getItem("user");
     let token = localStorage.getItem("token");
-    console.log(movie);
-    console.log(token);
-    axios.delete(`https://myshowflix.herokuapp.com/users/${username}/movies/${movies._id}`, {
+    axios.delete(`https://myshowflix.herokuapp.com/users/${username}/movies/${movieId}`, {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(() => {
@@ -37,7 +34,7 @@ export function FavoriteMovieView(props) {
           ) : (
             favoriteMoviesList.map((movie) => {
               return (
-              <Col xs={10} sm={8} md={6} lg={4} key= {movies._id}>
+              <Col key= {movie._id} xs={10} sm={8} md={6} lg={4} >
                 <Card id="movie-card">
                   <Link to={`/movies/${movies._id}`}>
                     <Card.Img variant="top" src={movie.ImagePath} />
