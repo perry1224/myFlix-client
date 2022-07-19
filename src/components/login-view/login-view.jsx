@@ -46,9 +46,11 @@ const handleSubmit = (e) => {
   .then(response => {
     const data = response.data;
     props.onLoggedIn(data);
+    alert('You are now logged in')
   })
   .catch(e => {
-    console.log('no such user')
+    console.log(e);
+          alert('Incorrect username or password')
   });
   }
 };
