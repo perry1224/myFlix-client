@@ -8,28 +8,18 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FavoriteMovieView } from './favorite-movie-view';
 import { UpdateView } from './update-view';
 
+import { remFavMovie } from '../../actions/actions';
+import { connect } from 'react-redux';
+
+
 
 export function ProfileView(props) {
-  const [ user, setUser ] = useState(props.user);
-  const [ movies, setMovies ] = useState(props.movies);
+  console.log('profile view')
+  const {movies, user} = props
   const [ favoriteMovies, setFavoriteMovies ] = useState([]);
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
 
-  const getUser = () => {
-    axios.get(`https://myshowflix.herokuapp.com/users/${currentUser}`, {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      setUser(response.data);
-      setFavoriteMovies(response.data.FavoriteMovies)
-    })
-    .catch(error => console.error(error))
-  }
-
-  useEffect(() => {
-    getUser();
-  }, [])
 
   const handleDelete = () => {
     axios.delete(`https://myshowflix.herokuapp.com/users/${currentUser}`, {
@@ -67,7 +57,7 @@ export function ProfileView(props) {
           <FavoriteMovieView 
           
           movies={movies} 
-          favoriteMovies={favoriteMovies} 
+          favoriteMovies={user.FavoriteMovies} 
           currentUser={currentUser} 
           token={token}/>
         </Row>
@@ -76,3 +66,11 @@ export function ProfileView(props) {
     </Container>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+      user: state.user
+  }
+}
+
+export default connect(mapStateToProps, { remFavMovie })(ProfileView);

@@ -4,6 +4,9 @@ import { Form, Button, Row, Col, Card, Container } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import { setUser } from '../../actions/actions';
+
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -108,3 +111,11 @@ LoginView.propTypes = {
   }),
   onLoggedIn: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => {
+  return {
+      user: state.user
+  };
+}
+
+export default connect(mapStateToProps, { setUser })(LoginView);

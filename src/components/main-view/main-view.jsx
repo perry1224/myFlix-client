@@ -4,15 +4,14 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 // #0
-import { setMovies } from '../../actions/actions';
-// we haven't written this one yet
+import { setMovies, setUser } from '../../actions/actions';
+
 import MoviesList from '../movies-list/movies-list';
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { Navbar } from "../navbar/navbar-view";
 import { ProfileView } from "../profile-view/profile-view";
@@ -34,8 +33,21 @@ class MainView extends React.Component {
       this.setState({
         user: localStorage.getItem('user')
       });
+      this.getUser(accessToken, localStorage.getItem('user'));
       this.getMovies(accessToken);
     }
+  }
+
+  getUser (token, username) {
+    axios.get(`https://myshowflix.herokuapp.com/users/${username}`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      console.log(this, this.props)
+      this.props.setUser(response.data)
+      // setFavoriteMovies(response.data.FavoriteMovies)
+    })
+    .catch(error => console.error(error))
   }
 
   getMovies(token) {
@@ -58,7 +70,7 @@ class MainView extends React.Component {
       user: authData.user.Username,
       userData: authData.user
     });
-  
+    this.props.setUser(authData.user);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
@@ -91,9 +103,8 @@ onRegistration() {
 
 
 render() {
-  let { movies } = this.props;
-  let { user } = this.state;
-
+  let { movies, user } = this.props;
+console.log(this.props.user)
   // if (!user) return <Row>
   //   <Col>
   //     <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -103,7 +114,7 @@ render() {
 
   return (
     <Router>
-      <Navbar user={user}></Navbar>
+      <Navbar user={user?.Username || "unknown"}></Navbar>
       
       <Row className="main-view justify-content-md-center">
         <Route exact path="/" render={() => {
@@ -146,7 +157,7 @@ render() {
 
           </Col>
           }} />
-        <Route path={`/users/${user}`} render={({ history, match }) => {
+        <Route path={`/users/:username`} render={({ history, match }) => {
             if (!user)
               return (
                 <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
@@ -183,8 +194,10 @@ render() {
 }
 // #7
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  console.log('hello')
+  return { movies: state.movies, user: state.user }
+
 }
 
 // #8
-export default connect(mapStateToProps, { setMovies } )(MainView);
+export default connect(mapStateToProps, { setMovies, setUser } )(MainView);
