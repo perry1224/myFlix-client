@@ -4,7 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 // #0
-import { setMovies, setUser } from '../../actions/actions';
+import { setMovies, setUser, setFavorites, addFavMovie, remFavMovie, deleteUser, updateUser } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 
@@ -200,4 +200,4 @@ let mapStateToProps = state => {
 }
 
 // #8
-export default connect(mapStateToProps, { setMovies, setUser } )(MainView);
+export default connect(mapStateToProps, { setMovies, setUser, setFavorites, remFavMovie, addFavMovie, deleteUser, updateUser } )(MainView);

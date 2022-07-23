@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FavoriteMovieView } from './favorite-movie-view';
 import { UpdateView } from './update-view';
 
-import { remFavMovie } from '../../actions/actions';
+import { remFavMovie, addFavMovie, updateUser, deleteUser, setFavorites } from '../../actions/actions';
 import { connect } from 'react-redux';
 
 
@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 export function ProfileView(props) {
   console.log('profile view')
   const {movies, user} = props
-  const [ favoriteMovies, setFavoriteMovies ] = useState([]);
+  
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
 
@@ -73,4 +73,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { remFavMovie })(ProfileView);
+export default connect(mapStateToProps, { remFavMovie, addFavMovie, setFavorites, deleteUser, updateUser, UpdateView })(ProfileView);
