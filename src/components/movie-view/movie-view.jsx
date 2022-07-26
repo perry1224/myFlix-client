@@ -3,6 +3,8 @@ import "./movie-view.scss";
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import { setUser } from '../../actions/actions'
+import { connect } from 'react-redux';
 
 export class MovieView extends React.Component {
 
@@ -38,6 +40,7 @@ export class MovieView extends React.Component {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
+        this.props.setUser(response.data)
         console.log(response.data);
         alert(`${movie.Title} has been added from your list.`);
       })
@@ -59,6 +62,7 @@ export class MovieView extends React.Component {
         }
       )
       .then((response) => {
+        this.props.setUser(response.data)
         console.log(response.data);
         alert(`${movie.Title} has been removed from your list.`);
       })
@@ -125,3 +129,10 @@ export class MovieView extends React.Component {
   }
 }
 
+let mapStateToProps = state => {
+  console.log('hello')
+  return { movies: state.movies, user: state.user }
+
+}
+
+export default connect(mapStateToProps, { setUser })(MovieView);

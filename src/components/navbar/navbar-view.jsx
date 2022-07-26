@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Nav, Navbar, Button, } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 export function Navbar ({user}) {
 
@@ -27,7 +28,10 @@ export function Navbar ({user}) {
                       <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className = "ml-auto">
                               {isAuth() && (
-                                      <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
+                                <Link to={`/users/${user}`}>
+                                  <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
+                                </Link>
+                                      
                               )} 
                              
 

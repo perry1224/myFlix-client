@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import { setUser } from '../../actions/actions';
+import { connect } from 'react-redux';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 import './profile-view.scss';
 
 export function UpdateView(props) {
-  const { user } = props;
+  const { user, setUser } = props;
   const [ username, setUsername] = useState('');
   const [ password, setPassword] = useState('');
   const [ email, setEmail] = useState('');
@@ -49,6 +51,7 @@ export function UpdateView(props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
+     
       const token = localStorage.getItem('token');
       axios.put(`https://myshowflix.herokuapp.com/users/${user.Username}`, {
         Username: username,
@@ -59,10 +62,11 @@ export function UpdateView(props) {
       {
         headers: { Authorization: `Bearer ${token}`}
       })
-      .then(response => {
+      .then((response) => {
+        setUser(response.data)
         console.log(response.data);
         alert('Profile was successfully updated.');
-        window.open(`/users/${username}`, '_self');
+        
       })
       .catch(error => {
         console.error(error);
@@ -109,3 +113,10 @@ export function UpdateView(props) {
   )
 }
 
+let mapStateToProps = state => {
+  console.log('hello')
+  return { movies: state.movies, user: state.user }
+
+}
+
+export default connect(mapStateToProps, { setUser })(UpdateView);

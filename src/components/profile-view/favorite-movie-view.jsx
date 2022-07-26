@@ -2,11 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button, Card, Col } from 'react-bootstrap';
-
+import { setUser } from '../../actions/actions';
+import { connect } from 'react-redux';
 
 
 export function FavoriteMovieView(props) {
-  const { movies, favoriteMovies } = props;
+  const { movies, favoriteMovies, setUser } = props;
   
   const favoriteMoviesList = movies.filter(m => {
    favoriteMovies.includes(m._id) 
@@ -19,9 +20,10 @@ export function FavoriteMovieView(props) {
     axios.delete(`https://myshowflix.herokuapp.com/users/${username}/movies/${movieId}`, {
       headers: { Authorization: `Bearer ${token}`}
     })
-    .then(() => {
+    .then((response) => {
+      setUser(response.data)
       alert(`The movie was successfully deleted.`)
-      window.open(`/users/${username}`, '_self');
+    
     }).
     catch(error => console.error(error))
   }
@@ -60,3 +62,11 @@ export function FavoriteMovieView(props) {
     </>
   )
 }
+
+let mapStateToProps = state => {
+  console.log('hello')
+  return { movies: state.movies, user: state.user }
+
+}
+
+export default connect(mapStateToProps, { setUser })(FavoriteMovieView);

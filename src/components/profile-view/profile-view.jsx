@@ -5,8 +5,8 @@ import axios from 'axios';
 import "./profile-view.scss";
 import { Button, Col, Container, Row } from 'react-bootstrap';
 
-import { FavoriteMovieView } from './favorite-movie-view';
-import { UpdateView } from './update-view';
+import  FavoriteMovieView from './favorite-movie-view';
+import  UpdateView  from './update-view';
 
 import { remFavMovie, addFavMovie, updateUser, deleteUser, setFavorites } from '../../actions/actions';
 import { connect } from 'react-redux';
@@ -73,4 +73,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { remFavMovie, addFavMovie, setFavorites, deleteUser, updateUser, UpdateView })(ProfileView);
+export default connect(mapStateToProps, { remFavMovie, addFavMovie, setFavorites, deleteUser, updateUser })(ProfileView);

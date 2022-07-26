@@ -12,9 +12,9 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
-import { MovieView } from '../movie-view/movie-view';
+import  MovieView  from '../movie-view/movie-view';
 import { Navbar } from "../navbar/navbar-view";
-import { ProfileView } from "../profile-view/profile-view";
+import  ProfileView  from "../profile-view/profile-view";
 import { RegistrationView } from '../registration-view/registration-view';
 import { Row, Col, } from 'react-bootstrap';
 
