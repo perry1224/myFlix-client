@@ -28,9 +28,9 @@ export function Navbar ({user}) {
                       <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className = "ml-auto">
                               {isAuth() && (
-                                <Link to={`/users/${user}`}>
+                                
                                   <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
-                                </Link>
+                                
                                       
                               )} 
                              

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { setUser } from '../../actions/actions';
@@ -51,7 +50,6 @@ export function UpdateView(props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
-     
       const token = localStorage.getItem('token');
       axios.put(`https://myshowflix.herokuapp.com/users/${user.Username}`, {
         Username: username,
@@ -64,7 +62,6 @@ export function UpdateView(props) {
       })
       .then((response) => {
         setUser(response.data)
-        console.log(response.data);
         alert('Profile was successfully updated.');
         
       })
@@ -114,8 +111,8 @@ export function UpdateView(props) {
 }
 
 let mapStateToProps = state => {
-  console.log('hello')
-  return { movies: state.movies, user: state.user }
+ 
+  return { user: state.user }
 
 }
 
