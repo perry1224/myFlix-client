@@ -4,7 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 // #0
-import { setMovies, setUser, setFavorites, addFavMovie, remFavMovie, deleteUser, updateUser } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 
@@ -65,7 +65,6 @@ class MainView extends React.Component {
     /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
 
   onLoggedIn(authData) {
-    console.log(authData);
     this.setState({
       user: authData.user.Username,
       userData: authData.user
@@ -194,10 +193,10 @@ console.log(this.props.user)
 }
 // #7
 let mapStateToProps = state => {
-  console.log('hello')
+  
   return { movies: state.movies, user: state.user }
 
 }
 
 // #8
-export default connect(mapStateToProps, { setMovies, setUser, setFavorites, remFavMovie, addFavMovie, deleteUser, updateUser } )(MainView);
+export default connect(mapStateToProps, { setMovies, setUser } )(MainView);
