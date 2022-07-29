@@ -55,7 +55,7 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      
+      console.log(this, this.props)
       this.props.setMovies(response.data);
     })
     .catch(function (error) {
@@ -141,6 +141,8 @@ console.log(this.props.user)
         }} />
 
         <Route path="/director/:Name" render={({ match, history }) => {
+          console.log("hello")
+          console.log(Col, DirectorView)
           if (movies.length === 0) return <div className="main-view" />;
             return <Col md={8}>
             <DirectorView director={movies.find(m => m.Director.Name === match.params.Name).Director} 

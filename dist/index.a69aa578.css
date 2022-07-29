@@ -1,14 +1,5 @@
 
 
-.card img {
-  object-fit: cover;
-  object-position: center top;
-}
-
-.card-text {
-  color: #000;
-}
-
 dd dl {
   margin-left: 2em;
 }
@@ -22,6 +13,19 @@ dl dt {
 }
 
 .card {
+  color: #0777d4;
+}
+
+.card img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.card-text {
+  color: #000;
+}
+
+h4 {
   color: #0777d4;
 }
 
