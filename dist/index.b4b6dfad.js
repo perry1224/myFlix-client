@@ -39748,11 +39748,7 @@ const mapStateToProps = (state)=>{
     };
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, {
-    remFavMovie: (0, _actions.remFavMovie),
-    addFavMovie: (0, _actions.addFavMovie),
-    setFavorites: (0, _actions.setFavorites),
-    deleteUser: (0, _actions.deleteUser),
-    updateUser: (0, _actions.updateUser)
+    setUser: (0, _actions.setUser)
 })(ProfileView);
 var _c;
 $RefreshReg$(_c, "ProfileView");
@@ -39762,7 +39758,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","./profile-view.scss":"eyKYH","react-bootstrap":"3AD9A","./favorite-movie-view":"1fTPP","./update-view":"fs4jm","../../actions/actions":"biFwH","react-redux":"bdVon","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"eyKYH":[function() {},{}],"1fTPP":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","./profile-view.scss":"eyKYH","react-bootstrap":"3AD9A","./favorite-movie-view":"1fTPP","./update-view":"fs4jm","react-redux":"bdVon","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../actions/actions":"biFwH"}],"eyKYH":[function() {},{}],"1fTPP":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9686 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
