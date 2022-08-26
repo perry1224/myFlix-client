@@ -13,7 +13,7 @@ import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { LoginView } from '../login-view/login-view';
 import  MovieView  from '../movie-view/movie-view';
-import { Navbar } from "../navbar/navbar-view";
+import { NavBar }  from "../navbar/navbar-view";
 import  ProfileView  from "../profile-view/profile-view";
 import { RegistrationView } from '../registration-view/registration-view';
 import { Row, Col, } from 'react-bootstrap';
@@ -113,7 +113,7 @@ console.log(this.props.user)
 
   return (
     <Router>
-      <Navbar user={user?.Username || "unknown"}></Navbar>
+      <NavBar user={user?.Username || "unknown"}></NavBar>
       
       <Row className="main-view justify-content-md-center">
         <Route exact path="/" render={() => {

@@ -25636,7 +25636,7 @@ class MainView extends (0, _reactDefault.default).Component {
         // if (movies.length === 0) return <div className="main-view" />;
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
             children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarView.Navbar), {
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarView.NavBar), {
                     user: user1?.Username || "unknown"
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
@@ -39436,13 +39436,13 @@ $parcel$ReactRefreshHelpers$880b.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Navbar", ()=>Navbar);
+parcelHelpers.export(exports, "NavBar", ()=>NavBar);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
-function Navbar({ user  }) {
+function NavBar({ user  }) {
     const onLoggedout = ()=>{
         localStorage.clear();
         window.open("/", "_self");
@@ -39523,9 +39523,9 @@ function Navbar({ user  }) {
         columnNumber: 5
     }, this);
 }
-_c = (0, _reactBootstrap.Navbar);
+_c = NavBar;
 var _c;
-$RefreshReg$(_c, "Navbar");
+$RefreshReg$(_c, "NavBar");
 
   $parcel$ReactRefreshHelpers$880b.postlude(module);
 } finally {
