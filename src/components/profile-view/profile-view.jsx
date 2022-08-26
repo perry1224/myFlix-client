@@ -8,7 +8,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import  FavoriteMovieView from './favorite-movie-view';
 import  UpdateView  from './update-view';
 
-import { setUser } from '../../actions/actions';
+
 import { connect } from 'react-redux';
 
 
@@ -73,4 +73,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setUser })(ProfileView);
+export default connect(mapStateToProps, { })(ProfileView);
