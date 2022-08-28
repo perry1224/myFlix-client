@@ -1,0 +1,24 @@
+.card img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.card-text {
+  color: black;
+}
+dd dl {
+  margin-left: 2em;
+}
+
+dl dl dt {
+  display: inline-block;
+}
+
+dl dt {
+  color: rgb(7, 119, 212);
+}
+.card {
+  color: rgb(7, 119, 212);
+}
+
+/*# sourceMappingURL=index.3f764291.css.map */
