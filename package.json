@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "source": "src/index.html",
+  "homepage": "https://perry1224.github.io/myFlix-client/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
@@ -20,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/perry1224/myFlix-client/issues"
   },
-  "homepage": "https://perry1224.github.io/myFlix-client/",
+ 
   "dependencies": {
     "axios": "^0.27.2",
     "gh-pages": "^4.0.0",
