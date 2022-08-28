@@ -5,11 +5,12 @@
   "source": "src/index.html",
   "homepage": "https://perry1224.github.io/myFlix-client/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "start": "parcel src/index.html",
-    "build": "parcel build"
+    "deploy": "gh-pages -d build"
 
   },
   "repository": {
