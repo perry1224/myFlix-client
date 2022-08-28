@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/perry1224/myFlix-client/issues"
   },
-  "homepage": "https://github.com/perry1224/myFlix-client",
+  "homepage": "https://perry1224.github.io/myFlix-client/",
   "dependencies": {
     "axios": "^0.27.2",
     "gh-pages": "^4.0.0",
